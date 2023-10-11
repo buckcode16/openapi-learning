@@ -52,7 +52,7 @@ paths:
       summary: Delete User
       responses:
         '204':
-          description: No Content
+          description: Ne Content
   /jobs:
     post:
       summary: Create Job
