@@ -2,7 +2,33 @@ openapi: 3.0.3
 info:
   title: PetSitter API
   version: '0.1'
+security:
+  - SessionToken: []
 paths:
+  /sessions:
+    post:
+      tags:
+        - Users
+      summary: Start Session (Login)
+      operationId: startSession
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      security: []
   /users:
     post:
       summary: Register User
@@ -19,6 +45,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
+      security: []
   /users/{id}:
     parameters:
       - schema:
@@ -506,3 +533,15 @@ components:
           type: string
         job_id:
           type: string
+    Session:
+      type: object
+      properties:
+        user_id:
+          type: string
+        auth_header:
+          type: string
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: Authorization
