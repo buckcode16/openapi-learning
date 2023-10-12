@@ -226,8 +226,8 @@ paths:
               properties:
                 items:
                   type: array
-                    items:
-                      $ref: '#/components/schemas/JobApplication'
+                  items:
+                    $ref: '#/components/schemas/JobApplication'
             examples:
               two-items:
                 summary: Two Job Applications
