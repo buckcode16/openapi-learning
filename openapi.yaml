@@ -6,6 +6,7 @@ paths:
   /users:
     post:
       summary: Register User
+      operationId: registerUser
       responses:
         '201':
           description: Created
@@ -21,12 +22,13 @@ paths:
   /users/{id}:
     parameters:
       - schema:
-          type: integer
+          type: string
         name: id
         in: path
         required: true
     get:
       summary: View User
+      operationId: viewUserWithId
       responses:
         '200':
           description: OK
@@ -36,6 +38,7 @@ paths:
                 $ref: '#/components/schemas/User'
     put:
       summary: Modify User
+      operationId: modifyUserWithId
       responses:
         '200':
           description: OK
@@ -50,12 +53,14 @@ paths:
               $ref: '#/components/schemas/User'
     delete:
       summary: Delete User
+      operationId: deleteUserWithId
       responses:
         '204':
           description: Ne Content
   /jobs:
     post:
       summary: Create Job
+      operationId: createJob
       responses:
         '201':
           description: Created
@@ -63,6 +68,10 @@ paths:
             Location:
               schema:
                 type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
       requestBody:
         content:
           application/json:
@@ -70,6 +79,7 @@ paths:
               $ref: '#/components/schemas/Job'
     get:
       summary: List All Jobs
+      operationId: listAllJobs
       responses:
         '200':
           description: OK
@@ -121,12 +131,13 @@ paths:
   /jobs/{id}:
     parameters:
       - schema:
-          type: integer
+          type: string
         name: id
         in: path
         required: true
     get:
       summary: View Job
+      operationId: viewJobWithId
       responses:
         '200':
           description: OK
@@ -136,6 +147,7 @@ paths:
                 $ref: '#/components/schemas/Job'
     put:
       summary: Modify Job
+      operationId: modifyJobWithId
       responses:
         '200':
           description: OK
@@ -150,18 +162,20 @@ paths:
               $ref: '#/components/schemas/Job'
     delete:
       summary: Delete job
+      operationId: deleteJobWithId
       responses:
         '204':
           description: No Content
   /jobs/{id}/job-applications:
     parameters:
       - schema:
-          type: integer
+          type: string
         name: id
         in: path
         required: true
     get:
       summary: List Applications For Job
+      operationId: viewApplicationsForJob
       responses:
         '200':
           description: OK
@@ -176,6 +190,7 @@ paths:
                       $ref: '#/components/schemas/JobApplication'
     post:
       summary: Create Job Application
+      operationId: createJobApplication
       responses:
         '201':
           description: Created
@@ -191,12 +206,13 @@ paths:
   /users/{id}/jobs:
     parameters:
       - schema:
-          type: integer
+          type: string
         name: id
         in: path
         required: true
     get:
       summary: List Jobs For User
+      operationId: listJobsForUser
       responses:
         '200':
           description: OK
@@ -215,9 +231,10 @@ paths:
         in: path
         required: true
         schema:
-          type: integer
+          type: string
     get:
       summary: List Applications For User
+      operationId: viewApplicationsForUser
       responses:
         '200':
           description: OK
@@ -414,12 +431,13 @@ paths:
   /job-applications/{id}:
     parameters:
       - schema:
-          type: integer
+          type: string
         name: id
         in: path
         required: true
     put:
       summary: Modify Job Application
+      operationId: modifyJobApplicationWithId
       requestBody:
         description: Update the application details
         content:
@@ -440,7 +458,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         email:
           type: string
         password:
@@ -455,9 +473,9 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         creator_user_id:
-          type: integer
+          type: string
         start_time:
           type: string
         end_time:
@@ -481,10 +499,10 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         status:
           type: string
         user_id:
-          type: integer
+          type: string
         job_id:
-          type: integer
+          type: string
